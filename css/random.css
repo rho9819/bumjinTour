@@ -1,0 +1,203 @@
+body {
+  /* background: linear-gradient(to right, #, #85d8ce);  */
+}
+#randombtn {
+  position: absolute;
+  /* left: 45%;
+    bottom: 20%; */
+  top: 16%;
+  left: 18%;
+}
+#h2 {
+  width: 36%;
+  position: absolute;
+  top: 40%;
+  left: 8%;
+  color: #888;
+}
+#map {
+  width: 70vh;
+  height: 70vh;
+  border: 10px solid #eee;
+  border-radius: 1rem;
+  /* position: absolute; */
+  /* top: 50%; */
+  transform: translateY(18%);
+}
+
+#map-section {
+  position: relative;
+  height: 450px;
+  width: 35%;
+  float: right;
+}
+
+#map img {
+  max-width: none;
+}
+
+#outerMap {
+  display: flex;
+}
+
+#content {
+  width: 50%;
+}
+/* body{
+    background: linear-gradient(to left, #076585, #fff);
+} */
+#randomimg {
+  text-align: center;
+  position: relative;
+  top: 750px;
+}
+
+.img {
+  width: 20vw;
+  height: 27vh;
+  margin-left: 60px;
+}
+#my_modal1 {
+  display: none;
+  width: 1000px;
+  padding: 20px 60px;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  border-radius: 3px;
+}
+
+#my_modal .modal_close_btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.my_modal {
+  display: none;
+  width: 1000px;
+  padding: 20px 60px;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  border-radius: 3px;
+  line-height: 23px;
+}
+
+.my_modal .modal_close_btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.fab:hover {
+  color: green;
+}
+.address {
+  line-height: 22px;
+  color: gray;
+}
+.copy {
+  color: gray;
+}
+#footer {
+  height: 250px;
+  width: 100%;
+  background: linear-gradient(to right, #dce35b, #45b649);
+  margin-top: 1000px;
+}
+
+.fnb {
+  text-align: center;
+}
+
+.fab {
+  font-size: 50px;
+  color: white;
+  margin: 10px;
+}
+
+.modalimg {
+  width: 300px;
+  height: 250px;
+}
+
+/* button */
+/* .page {
+  position: absolute;
+  z-index: 1000;
+  top: 20%;
+  left: 20%;
+  display: flex;
+  justify-content: center;
+} */
+
+/* add default color for animation start  */
+
+/* toggle this class */
+
+.color-bg-start {
+  background-color: salmon;
+}
+
+/* toggle class bg-animate-color */
+
+.bg-animate-color {
+  animation: random-bg 0.5s linear infinite;
+}
+
+/* add animation to bg color  */
+
+@keyframes random-bg {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.fun-btn {
+  /* change bg color to get different hues    */
+  background-color: salmon;
+  color: white;
+  padding: 2em 3em;
+  border: none;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  outline: none;
+  align-self: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.fun-btn:hover {
+  animation: random-bg 0.5s linear infinite, grow 1300ms ease infinite;
+}
+
+.start-fun {
+  background-color: #fff !important;
+  /* change color of button text when fun is started   */
+  color: salmon !important;
+}
+
+/* pulsating effect on button */
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+#menu {
+  margin-left: 50px;
+}

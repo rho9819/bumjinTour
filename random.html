@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/random.css">
+  <script src="https://kit.fontawesome.com/1cce07716b.js" crossorigin="anonymous"></script>
+  <title>랜덤 범진</title>
+</head>
+
+<body>
+  <!-- <button style="width: 230px; height: 80px;">랜덤버튼</button> -->
+  <div class="page">
+    <button id="randombtn" onclick="btn1()" class="fun-btn">Random Button</button>
+  </div>
+
+  <div id="outerMap">
+    <div id="content">
+      <h2 id="h2"></h2>
+    </div>
+    <section id="map-section">
+      <div id="map">
+    </section>
+  </div>
+
+
+  <script>
+
+
+
+
+    // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+    Element.prototype.setStyle = function (styles) {
+      for (var k in styles) this.style[k] = styles[k];
+      return this;
+    };
+    function modalOpen(idNum) {
+      modal(`my_modal${idNum}`);
+    }
+
+    let url = 'http://api.data.go.kr/openapi/tn_pubr_public_trrsrt_api';
+    let key = '63io0Lz1tOBbej5xKlpmDi%2BegcDRs5Sdl%2FMGAonyTpOkiKTTheiQiZgjvX0jqHbZAH%2FfxceivAHcs6TryiYorQ%3D%3D';
+    const h2 = document.getElementById("h2");
+    function btn1() {
+      var number = Math.floor(Math.random() * 644) + 1;
+      fetch(`${url}?ServiceKey=${key}&pageNo=${number}&numOfRows=1&type=json`)
+        .then(response => response.json())
+        .then((data) => {
+          h2.innerHTML = `이름:${data.response.body.items[0].trrsrtNm}<br>소재지지번주소:${data.response.body.items[0].lnmadr}<br>소재지도로명주소:${data.response.body.items[0].rdnmadr}<br>관광지소개:${data.response.body.items[0].trrsrtIntrcn}`;
+          console.log(data.response.body);
+
+          let { latitude, longitude, trrsrtIntrcn, trrsrtNm } = data.response.body.items[0];
+
+          updateMap(latitude, longitude, trrsrtNm, trrsrtIntrcn);
+        })
+    }
+    //google Map
+    var marker;
+    function initMap() {
+      let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        scrollwheel: false,
+        center: { lat: 37.593987, lng: 127.1557148 },
+        mapTypeId: 'roadmap'
+      });
+
+      marker = new google.maps.Marker({
+        title: '최고집이사',
+        infoWindow: {
+          content: '<p><strong>포장이사전문업체</strong><br/>경기도 구리시 수택동 883<br/>대표전화: 1666-2498<br/>대한민국</p>'
+        },
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        position: { lat: 37.593987, lng: 127.1557148 }
+      });
+      marker.addListener('click', toggleBounce);
+    }
+
+    function updateMap(lat, long, title, content) {
+      let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        scrollwheel: false,
+        center: { lat: parseFloat(lat), lng: parseFloat(long) },
+        mapTypeId: 'roadmap'
+      });
+
+      marker = new google.maps.Marker({
+        title,
+        infoWindow: {
+          content
+        },
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        position: { lat: parseFloat(lat), lng: parseFloat(long) }
+      });
+      marker.addListener('click', toggleBounce);
+    }
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    // button
+    $('.fun-btn').on('click', function (event) {
+      $(this).toggleClass('start-fun');
+      var $page = $('.page');
+      $page.toggleClass('color-bg-start')
+        .toggleClass('bg-animate-color');
+
+      //change text when when button is clicked
+
+      $(this).hasClass('start-fun') ?
+        $(this).text('stop the fun') :
+        $(this).text('start the fun');
+
+    });
+  </script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcXN0Llh3vP9kwtyTG6VHCn08rAbZHjeg&callback=initMap"></script>
+  </script>
+</body>
+
+</html>
